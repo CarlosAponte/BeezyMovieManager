@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeezyServices.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,6 +17,7 @@ namespace BeezyMovieAPI
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,6 +35,9 @@ namespace BeezyMovieAPI
             });
 
             services.AddControllers();
+
+            services.Add(new ServiceDescriptor(typeof(IMovie), new Movie()));
+            services.Add(new ServiceDescriptor(typeof(ITVShow), new TVShow()));
         }
 
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

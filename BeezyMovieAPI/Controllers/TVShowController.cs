@@ -11,24 +11,22 @@ namespace BeezyMovieAPI.Controllers
 {
     [Route("api/[controller]/GetRecomendations")]
     [ApiController]
-    public class MovieController : ControllerBase
+    public class TVShowController : ControllerBase
     {
         private readonly IConfiguration _config;
-        private readonly IMovie _movie;
+        private readonly ITVShow _tvSHow;
 
-        public MovieController(IConfiguration config, IMovie movie)
+        public TVShowController(IConfiguration config, ITVShow tvShow)
         {
             _config = config;
-            _movie = movie;
+            _tvSHow = tvShow;
         }
 
         [HttpGet]
-        public IMovie GetMovies()
+        public List<ITVShow> GetRecomendedTvShows()
         {
             var apiKey = _config.GetValue<string>("ApiKey");
-            _movie.Title = "The NUN";
-            _movie.Overview = "Horror movie with a creepy nun";
-            return _movie;
+            return _tvSHow.GetRecomended();
         }
     }
 }
